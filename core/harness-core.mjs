@@ -1,0 +1,98 @@
+// harness-core.mjs — pure, dependency-free logic for the pi harness extension.
+// No pi imports; unit-testable with plain `node --test`. harness.ts wires this to pi.
+// Pure re-export barrel: index.ts and the unit suite import the whole core surface here.
+
+// ---- barrel re-exports (Batch 1): moved-out modules -----------------------
+export { CORE_VERSION } from "./modules/constants.mjs";
+export { DEFAULT_CONFIG } from "./modules/constants.mjs";
+export { LONGTERM_DIR } from "./modules/constants.mjs";
+export { TEMP_DIR } from "./modules/constants.mjs";
+export { USE_COLOR } from "./modules/constants.mjs";
+export { bashMutates } from "./modules/safety.mjs";
+export { color } from "./modules/constants.mjs";
+export { dangerTier } from "./modules/safety.mjs";
+export { dangerousBash } from "./modules/safety.mjs";
+export { declareRequired } from "./modules/safety.mjs";
+export { editRequiresGate } from "./modules/safety.mjs";
+export { globToRegExp } from "./modules/safety.mjs";
+export { insideProject } from "./modules/safety.mjs";
+export { isIgnored } from "./modules/safety.mjs";
+export { normalizeRel } from "./modules/safety.mjs";
+export { normalizeTaskText } from "./modules/parse.mjs";
+export { parseAcceptance } from "./modules/parse.mjs";
+export { parseCommitSubject } from "./modules/parse.mjs";
+export { parseLanePrediction } from "./modules/parse.mjs";
+export { parsePersona } from "./modules/parse.mjs";
+export { parsePlan } from "./modules/parse.mjs";
+export { parsePlanProgress } from "./modules/parse.mjs";
+export { parseRemainingEstimate } from "./modules/parse.mjs";
+export { parseRequirements } from "./modules/parse.mjs";
+export { parseRequirementVerdicts } from "./modules/parse.mjs";
+export { parseRunArgs } from "./modules/parse.mjs";
+export { parseThinkingPrediction } from "./modules/parse.mjs";
+export { scopeAllowed } from "./modules/safety.mjs";
+export { shq } from "./modules/safety.mjs";
+export { stripAcceptanceBlocks } from "./modules/parse.mjs";
+
+// ---- barrel re-exports (Batch 2): moved-out modules -----------------------
+export { EDIT_MISS_RE } from "./modules/output.mjs";
+export { autoCommit } from "./modules/git.mjs";
+export { buildSnapshot } from "./modules/report.mjs";
+export { buildTldr } from "./modules/report.mjs";
+export { changedFileHeads } from "./modules/git.mjs";
+export { detectVerify } from "./modules/detect.mjs";
+export { editMismatchHint } from "./modules/output.mjs";
+export { estimateTokens } from "./modules/output.mjs";
+export { extractFailures } from "./modules/output.mjs";
+export { gateResult } from "./modules/detect.mjs";
+export { gitNewFiles } from "./modules/git.mjs";
+export { mismatchedEditIndices } from "./modules/output.mjs";
+export { nearestPackageDir } from "./modules/detect.mjs";
+export { parseTestFailures } from "./modules/output.mjs";
+export { renderTable } from "./modules/report.mjs";
+export { reportColor } from "./modules/report.mjs";
+export { reportRows } from "./modules/report.mjs";
+export { summarizeToolOutput } from "./modules/output.mjs";
+export { tail } from "./modules/output.mjs";
+export { testSelector } from "./modules/detect.mjs";
+
+// ---- barrel re-exports (Batch 3): moved-out modules -----------------------
+export { appendEstimateRecord } from "./modules/thinking.mjs";
+export { appendRunStats } from "./modules/thinking.mjs";
+export { cachedGreen } from "./modules/state.mjs";
+export { changedPaths } from "./modules/state.mjs";
+export { checkFailureMemory } from "./modules/state.mjs";
+export { classifyLane } from "./modules/stages.mjs";
+export { cleanupRunArtifacts } from "./modules/artifacts.mjs";
+export { clearTempDir } from "./modules/artifacts.mjs";
+export { discountEstimate } from "./modules/thinking.mjs";
+export { ensureArtifactDirs } from "./modules/artifacts.mjs";
+export { extendBudget } from "./modules/thinking.mjs";
+export { failureTriage } from "./modules/state.mjs";
+export { gate2Required } from "./modules/stages.mjs";
+export { gateCacheKey } from "./modules/state.mjs";
+export { gitHead } from "./modules/state.mjs";
+export { invalidateGreen } from "./modules/state.mjs";
+export { isForbiddenArtifactPath } from "./modules/artifacts.mjs";
+export { isHarnessPath } from "./modules/artifacts.mjs";
+export { lastGreen } from "./modules/state.mjs";
+export { loadEstimateBias } from "./modules/thinking.mjs";
+export { loadGateCache } from "./modules/state.mjs";
+export { loadGateFailures } from "./modules/state.mjs";
+export { loadGateRollbacks } from "./modules/state.mjs";
+export { loadRunStats } from "./modules/state.mjs";
+export { loadSkillCard } from "./modules/state.mjs";
+export { normalizeBudget } from "./modules/thinking.mjs";
+export { phaseThinking } from "./modules/thinking.mjs";
+export { recordGateFail } from "./modules/state.mjs";
+export { recordGateFailure } from "./modules/state.mjs";
+export { recordGreen } from "./modules/state.mjs";
+export { renderPersona } from "./modules/stages.mjs";
+export { shouldEscalate } from "./modules/thinking.mjs";
+export { shouldStop } from "./modules/thinking.mjs";
+export { stageLayerCard } from "./modules/stages.mjs";
+export { stageSkillCard } from "./modules/stages.mjs";
+export { statsRows } from "./modules/state.mjs";
+export { suggestBudget } from "./modules/state.mjs";
+export { tasklistEnabled } from "./modules/thinking.mjs";
+export { verifyTier } from "./modules/stages.mjs";

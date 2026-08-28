@@ -1,0 +1,6 @@
+# Runtime harness state (created per-project by the harness on /run)
+.harness/
+
+# Node / deps
+node_modules/
+*.log
