@@ -40,13 +40,24 @@ Requirements and build against it. Re-derive it if a later phase reveals the
 direction changed — the brief is a living frame, updated for free within the
 same session, not a one-shot token.
 
-## Requirements
+## Requirements (must follow the Creative brief)
 
-Draft a first-pass `## Requirements` (a numbered/bulleted list) for the task, then
-self-review it through the first-principles lens: Question every requirement
-(source, who benefits, what evidence, what breaks if ignored), Delete anything
-that doesn't justify its existence, Simplify what remains, and only then
-Accelerate/Automate. The refined requirements feed the plan you commit next.
+STRICTLY, in this order, before any plan:
+
+1. Turn your `Brief:` above into a concrete `## Requirements` list — every
+   goal, quality bar and direction either becomes a requirement or is explicitly
+   rejected (no dangling ideas).
+2. Number each requirement `R1.`, `R2.`, … — these stable ordinals are what the
+   plan, the review gate and the report cite, so do not renumber or merge them
+   later.
+3. Self-review the list through the first-principles lens: Question every
+   requirement (source, who benefits, what evidence, what breaks if ignored),
+   Delete anything that doesn't justify its existence, Simplify what remains,
+   and only then Accelerate/Automate. Deleted items are dropped (renumber the
+   survivors).
+4. The refined requirements feed the `## Plan` you commit next — every plan task
+   traces to at least one R#.
+
 
 ## Persona
 
@@ -124,6 +135,10 @@ purposes.
 Prefer ending your summary with `Commit: <one-line what-changed>` — the auto-commit
 uses that line as its subject. Also end your summary with an evidence-based
 `Acceptance: met|partial|unmet` line (the harness reports it and blocks auto-commit
+   is met. Map EVERY requirement from `## Requirements` to its verdict with one
+   `R<n>: met|partial|unmet` line each (e.g. `R1: met`, `R2: partial`) — the
+   review gate and report span from these, so an unmapped requirement holds the
+   run open. Verdicts must be evidence-based against the diff, not assumed.
 on `unmet`). If you cannot finish within the remaining budget, end with a line
 exactly like "Remaining: N turns" so the harness knows how much more is needed.
 The harness reports cost stats after you finish.
