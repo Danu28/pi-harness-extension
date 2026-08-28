@@ -479,8 +479,37 @@ export default function harness(pi: ExtensionAPI) {
           : "the task is expected to fix it — the first GATE run after your edits will show it."
         : "none — there is no automated gate, so review your diff carefully before summarizing.";
 
+
+      // Phase 1 — Restate (dedicated out-of-band pass, one model call). Build a
+      // sharper, self-contained task statement from the full project context so
+      // Requirements/Plan/build all derive from it. Safe fallback to the literal
+      // task on any failure — run.md then restates in-session.
+      const restatePrompt = [
+        "You are the Restate phase of a task harness. Run exactly one pass.",
+        "Turn the project context below into a sharp, self-contained working task",
+        "statement — the prompt you would want if the original request were lost —",
+        "aiming for a genuinely good result, not just a functional one.",
+        "Return ONLY the restated task (4-8 lines): what to build, what good looks",
+        "like, key project facts to respect, scope boundaries, and 2-3 directions",
+        "to go beyond the literal ask. No preamble, no code fences.",
+        "",
+        `TASK:\n${task}`,
+        `PERSONA:\n${renderPersona("planning", run.persona?.domain ?? null)}`,
+        `PROJECT SNAPSHOT:\n${snapshot}`,
+      ].join("\n");
+      let restatedTask = task;
+      if (ctx.model) {
+        try {
+          const res = await ctx.modelRegistry.complete(ctx.model, { messages: [{ role: "user", content: restatePrompt, timestamp: Date.now() }] }, { maxTokens: 1200 });
+          const text = res.content.flatMap((c) => (c.type === "text" ? [c.text] : [])).join("\n").trim();
+          if (text) restatedTask = text;
+        } catch (err) {
+          ctx.ui.notify(`Harness: restate pass failed (${err instanceof Error ? err.message : String(err)}) — using the literal task; restating in-session.`, "warning");
+        }
+      }
+
       const prompt = readProtocol()
-        .replaceAll("{{TASK}}", task + priorNote)
+        .replaceAll("{{TASK}}", restatedTask + priorNote)
         .replaceAll("{{SNAPSHOT}}", snapshot)
         .replaceAll("{{VERIFY}}", verifyText)
         .replaceAll("{{MAXFAILS}}", String(run.budget.maxConsecutiveFails))

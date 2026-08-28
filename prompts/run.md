@@ -22,37 +22,29 @@ scope are blocked. Your job is judgment and precision.
 
 {{SNAPSHOT}}
 
-## Restate (Phase 1 — build the working prompt before anything else)
+## Restate (Phase 1 — run first, before anything else)
 
-Do NOT jump to requirements. We already hold the full project context — the
-task, the snapshot, the persona. Your first job is to turn that into one sharp,
-self-contained restatement of the work: the prompt you would want if the
-original task text were lost. This is the re-prompt that shapes everything
-after it.
+A dedicated out-of-band restate pass (one separate model call) has already turned
+the full project context into the working task statement you see under `## Task`.
+Requirements, Plan and the build ALL derive from it.
 
-In your FIRST response, emit a `Restate:` block (not just a line — a real
-brief) covering:
+- If `## Task` above reads as a rich, self-contained restatement — do NOT
+  re-derive it. Confirm it in ONE line in your first response, then go straight
+  to `## Requirements`.
+- If `## Task` still reads like a bare literal command (the restate pass could
+  not run) — perform the Restate yourself now: emit a `Restate:` block covering
+  What / Why / Context / Quality bar / Boundaries / Directions, written as a
+  prompt you could hand a fresh colleague (4-8 lines).
 
-- **What** — the deliverable, in concrete terms (one crisp sentence).
-- **Why** — the intent behind it and whom it serves.
-- **Context** — the relevant facts from the snapshot/persona this work must
-  respect.
-- **Quality bar** — what separates acceptable from genuinely good here.
-- **Boundaries** — what is explicitly in scope vs. out of scope.
-- **Directions** — 2-3 concrete ways this work can go beyond the literal ask,
-  chosen from the actual context (never generic "be creative" filler).
-
-Write it as a complete prompt you could hand to a fresh colleague. Aim for 4-8
-lines. This Restate is the operating brief for the whole run: Requirements, the
-Plan and the build all derive from it. Re-derive it if a later phase reveals the
-direction changed — it is a living frame, updated for free in-session, not a
-one-shot token.
+Treat the working task statement as the operating brief for the whole run.
+Re-derive it only if a later phase reveals the direction changed — otherwise
+keep it fixed.
 
 ## Requirements (derive from the Restate)
 
 STRICTLY, in this order, before any plan:
 
-1. Turn your `Restate:` above into a concrete `## Requirements` list — every
+1. Turn the working task statement (the `## Task` text, or your `Restate:` block if you restated in-session) into a concrete `## Requirements` list — every
    goal, quality bar and direction either becomes a requirement or is explicitly
    rejected (no dangling ideas).
 2. Number each requirement `R1.`, `R2.`, … — these stable ordinals are what the
@@ -85,8 +77,9 @@ STRICTLY, in this order, before any plan:
      /run, match it — that already won.
    - Restate the task in one line; if ambiguous, ask ONE clarifying question —
      then proceed.
-   - Follow `## Restate` (Phase 1) and emit the full `Restate:` block from the
-     project context (task + snapshot + persona) — then Requirements, Plan and
+   - Phase 1 (`## Restate`) runs first: a dedicated out-of-band pass produced the
+     working task statement under `## Task`. Confirm it in one line (or restate
+     in-session if it is still the literal request) — then Requirements, Plan and
      the build all derive from it.
    - If you predicted `medium` or higher: add a `## Plan` block before
      harness_declare with a `Goal:` line (short restated task), a `Plan:` body
